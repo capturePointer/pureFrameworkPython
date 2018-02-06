@@ -1,2 +1,2 @@
-# pythonNewMessage
-自动发送最新的消息
+# pureFrameworkPython
+纯净的python web框架
