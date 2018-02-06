@@ -1,0 +1,27 @@
+<html>
+  <body>
+    <h3>
+      <a href="{{url('clear')}}">清空数据</a></h3>
+    <h3>
+      <a href="{{url('add')}}">添加</a></h3>
+    <table>
+      <tr>
+        <th>id</th>
+        <th>时间</th>
+        <th>标题</th>
+        <th>content</th>
+        <th>修改</th></tr>
+        {% for item in lists %}
+          <tr>
+            <td>{{item.id}}</td>
+            <td>{{time.strftime("%Y-%m-%d %H:%I:%S",time.localtime(item['create_time']))}}</td>
+            <td>
+              <a target="_blank" href="http://localhost:8090/">{{item.title}}</a></td>
+            <td>{{item.content}}</td>
+            <td>
+              <a href="edit?id={{item.id}}">修改</a></td>
+          </tr>
+        {% endfor %}
+    </table>
+  </body>
+</html>
