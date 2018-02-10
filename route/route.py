@@ -1,12 +1,13 @@
 #from functions import *
-from controllers.note import note
-n = note()
+from controllers.nodeController import nodeController
+nodeObj = nodeController()
 routes = [
-    (r'^$', n.index),
-    (r'index/?$', n.index),
-    (r'add/?$', n.add),
-    (r'doAdd/?$', n.doAdd),
-    (r'clear/?$', n.clear),
-    (r'edit/?$', n.edit),
-    (r'doEdit/?$', n.doEdit),
+    (r'^$', nodeObj.index),
+    (r'node/?$', nodeObj.index),
+    (r'node/index/?$', nodeObj.index),
+    (r'node/add/?$', nodeObj.add),
+    (r'node/doAdd/?$', nodeObj.doAdd),
+    (r'node/clear/?$', nodeObj.clear),
+    (r'node/edit/?$', nodeObj.edit),
+    (r'node/doEdit/?$', nodeObj.doEdit),
 ]

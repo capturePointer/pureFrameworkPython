@@ -12,7 +12,7 @@ from jinja2 import Environment, FileSystemLoader
 import sys
 from config import config
 
-class base:
+class baseController:
     def url(self,uri):
         return config.websitePath + "/" + uri
 

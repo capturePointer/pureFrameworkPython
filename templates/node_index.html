@@ -1,9 +1,9 @@
 <html>
   <body>
     <h3>
-      <a href="{{url('clear')}}">清空数据</a></h3>
+      <a href="{{url('node/clear')}}">清空数据</a></h3>
     <h3>
-      <a href="{{url('add')}}">添加</a></h3>
+      <a href="{{url('node/add')}}">添加</a></h3>
     <table>
       <tr>
         <th>id</th>
@@ -19,7 +19,7 @@
               <a target="_blank" href="http://localhost:8090/">{{item.title}}</a></td>
             <td>{{item.content}}</td>
             <td>
-              <a href="edit?id={{item.id}}">修改</a></td>
+              <a href="node/edit?id={{item.id}}">修改</a></td>
           </tr>
         {% endfor %}
     </table>

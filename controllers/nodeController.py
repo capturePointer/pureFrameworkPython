@@ -6,19 +6,20 @@ from core import globalBox
 from core import db
 import os
 import cgi
+import json
 from urllib.parse import urlparse
 from html import escape
 from jinja2 import Environment, FileSystemLoader
 import sys
 from config import config
-from controllers.base import base
+from controllers.baseController import baseController
 
-class note(base):
+class nodeController(baseController):
     def clear(self,env, start_response):
         cursor = db.getCursor()
         cursor.execute("DELETE FROM node")
         cursor.execute("DROP TABLE node")
-        start_response('302 Found', [('Location','index')])
+        start_response('302 Found', [('Location','node/index')])
         return ["clear success"]
 
     def index(self,env, start_response):
@@ -31,11 +32,11 @@ class note(base):
         self.assign("lists",lists)
         self.assign("time",time)
         self.assign("url",self.url)
-        htmlOutput = self.display("index")
+        htmlOutput = self.display("node_index")
         return [htmlOutput]
 
     def add(self,env, start_response):
-        htmlOutput = self.display("add")
+        htmlOutput = self.display("node_add")
         return [htmlOutput]
 
     def doAdd(self,env, start_response):
@@ -60,7 +61,7 @@ class note(base):
             if cursor is not None:
                 cursor.execute("INSERT INTO node (title,link,content,create_time) \
                     VALUES ('" + title + "', '" + link + "', '" + content +  "', '" + create_time + "')");
-        start_response('302 Found', [('Location','index')])
+        start_response('302 Found', [('Location','node/index')])
         return ["success"]
 
     def edit(self,env, start_response):
@@ -71,7 +72,7 @@ class note(base):
             cursor = cursor.execute("SELECT * FROM node WHERE `id` = " + id)
             data = cursor.fetchone()
         self.assign('data',data)
-        htmlOutput = self.display("edit")
+        htmlOutput = self.display("node_edit")
         return [htmlOutput]
 
     def doEdit(self,env, start_response):
@@ -96,5 +97,5 @@ class note(base):
             cursor = db.getCursor()
             if cursor is not None:
                 cursor.execute("UPDATE node SET `title`='"+ title +"',`link`='"+ link +"'" + ",`content`='"+ content +"'" + ",`create_time`='"+ create_time +"' WHERE `id` = " + id)
-        start_response('302 Found', [('Location','index')])
+        start_response('302 Found', [('Location','node/index')])
         return ["success"]
